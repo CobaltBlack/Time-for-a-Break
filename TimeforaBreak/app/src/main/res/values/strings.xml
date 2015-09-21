@@ -2,5 +2,8 @@
     <string name="app_name">Time for a Break</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="action_home">Home</string>
+    <string name="action_statistics">Statistics</string>
+    <string name="action_browse_stretches">Browse Stretches</string>
     <string name="action_settings">Settings</string>
 </resources>

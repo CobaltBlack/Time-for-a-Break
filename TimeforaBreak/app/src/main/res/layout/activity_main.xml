@@ -9,33 +9,34 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="119dp"
+        android:layout_marginTop="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="00"
             android:id="@+id/hours_text"
-            android:layout_marginTop="152dp"
-            android:style="@style/MainTimerStyle"
-            android:layout_alignParentTop="true"/>
+            android:theme="@style/MainTimerStyle"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="00"
             android:id="@+id/minutes_text"
-            android:style="@style/MainTimerStyle"
+            android:theme="@style/MainTimerStyle"
             android:layout_toRightOf="@id/hours_text"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:text="00"
             android:id="@+id/seconds_text"
-            android:style="@style/MainTimerStyle"
+            android:theme="@style/MainTimerStyle"
             android:layout_toRightOf="@id/minutes_text" />
     </LinearLayout>
 

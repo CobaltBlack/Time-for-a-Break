@@ -17,16 +17,15 @@
     </style>
 
     <style name="MyButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="background">@color/green</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:padding">10dp</item>
         <item name="android:minWidth">88dp</item>
         <item name="android:minHeight">36dp</item>
         <item name="android:layout_margin">3dp</item>
-        <item name="background">@color/green</item>
     </style>
 
     <style name="MainTimerStyle">
         <item name="android:textSize">48sp</item>
-        <item name="android:layout_margin">10dp</item>
     </style>
 </resources>

@@ -1,26 +1,24 @@
 package com.example.ericliu.timeforabreak;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.util.Log;
-
-public class MainActivity extends Activity {
+public class BrowseStretchActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("BrowseStretch", "Program here");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_browse_stretch);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        // TEST COMMENT
+        getMenuInflater().inflate(R.menu.menu_browse_stretch, menu);
         return true;
     }
 
@@ -34,11 +32,6 @@ public class MainActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if ( id == R.id.action_browse_stretches) {
-            Intent intent = new Intent(this, BrowseStretchActivity.class);
-            Log.d("MAIN", "Program here");
-            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

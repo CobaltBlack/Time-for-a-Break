@@ -1,12 +1,17 @@
 package com.example.ericliu.timeforabreak;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class MainActivity extends Activity {
 
@@ -32,15 +37,39 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if ( id == R.id.action_settings ) {
+//            getFragmentManager().beginTransaction()
+//                    .replace(android.R.id.content, new SettingsFragment())
+//                    .commit();
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(android.R.id.content, new SettingsFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
-        else if ( id == R.id.action_browse_stretches) {
+        else if ( id == R.id.action_browse_stretches ) {
             Intent intent = new Intent(this, BrowseStretchActivity.class);
-            Log.d("MAIN", "Program here");
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    // Settings Fragment
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.pref_general);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = super.onCreateView(inflater, container, savedInstanceState);
+            view.setBackgroundColor(getResources().getColor(android.R.color.white));
+
+            return view; }
+    }
+
 }

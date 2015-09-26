@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,13 +13,22 @@ import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
+
+    TextView hours_text;
+    TextView minutes_text;
+    TextView seconds_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        hours_text = (TextView)findViewById(R.id.hours_text);
+        minutes_text = (TextView)findViewById(R.id.minutes_text);
+        seconds_text = (TextView)findViewById(R.id.seconds_text);
     }
 
     @Override
@@ -55,6 +65,52 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void startTimer(View view) {
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
+                // Updates 3 textViews
+                updateMainClock(millisUntilFinished);
+            }
+
+            public void onFinish() {
+                //mTextField.setText("done!");
+                // Send notification or do stuff
+
+            }
+        }.start();
+    }
+
+    public void updateMainClock(long millisUntilFinished) {
+        int total_hours, total_minutes, total_seconds;
+        int hours, minutes, seconds;
+
+        total_seconds = ((int) millisUntilFinished) / 1000;
+        seconds = total_seconds % 60;
+        total_minutes = (total_seconds - seconds) / 60;
+        minutes = total_minutes % 60;
+        total_hours = (total_minutes - minutes) / 60;
+        hours = total_hours % 99;
+
+        String seconds_string =
+                , minutes_string, hours_string;
+
+        if(seconds_string.length() == 1) {
+            seconds_string = "0" + seconds_string;
+        }
+        if(minutes_string.length() == 1) {
+            minutes_string = "0" + minutes_string;
+        }
+        if(hours_string.length() == 1) {
+            hours_string = "0" + hours_string;
+        }
+
+        hours_text.setText(Integer.toString(hours));
+        minutes_text.setText(Integer.toString(minutes));
+        seconds_text.setText(Integer.toString(seconds));
+    }
+
     // Settings Fragment
     public static class SettingsFragment extends PreferenceFragment {
         @Override
@@ -71,5 +127,4 @@ public class MainActivity extends Activity {
 
             return view; }
     }
-
 }

@@ -30,4 +30,18 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
 
+    <EditTextPreference
+        android:key="work_interval"
+        android:inputType="number"
+        android:title="Work Time Interval"
+        android:defaultValue="30"
+        android:maxLength="3" />
+
+    <EditTextPreference
+        android:key="break_interval"
+        android:inputType="number"
+        android:title="Break Time Interval"
+        android:defaultValue="5"
+        android:maxLength="2" />
+
 </PreferenceScreen>

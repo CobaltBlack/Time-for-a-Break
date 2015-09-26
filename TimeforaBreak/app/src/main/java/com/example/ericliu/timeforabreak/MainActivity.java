@@ -3,9 +3,11 @@ package com.example.ericliu.timeforabreak;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,11 +22,14 @@ public class MainActivity extends Activity {
     TextView hours_text;
     TextView minutes_text;
     TextView seconds_text;
+    Boolean isWorking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Sets the default values for the application on initial running of the app
+        PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 
         hours_text = (TextView)findViewById(R.id.hours_text);
         minutes_text = (TextView)findViewById(R.id.minutes_text);
@@ -93,8 +98,9 @@ public class MainActivity extends Activity {
         total_hours = (total_minutes - minutes) / 60;
         hours = total_hours % 99;
 
-        String seconds_string =
-                , minutes_string, hours_string;
+        String seconds_string = Integer.toString(seconds);
+        String minutes_string = Integer.toString(minutes);
+        String hours_string = Integer.toString(hours);
 
         if(seconds_string.length() == 1) {
             seconds_string = "0" + seconds_string;
@@ -106,9 +112,15 @@ public class MainActivity extends Activity {
             hours_string = "0" + hours_string;
         }
 
-        hours_text.setText(Integer.toString(hours));
-        minutes_text.setText(Integer.toString(minutes));
-        seconds_text.setText(Integer.toString(seconds));
+        hours_text.setText(hours_string);
+        minutes_text.setText(minutes_string);
+        seconds_text.setText(seconds_string);
+    }
+
+    //Notifies the user that they should take a break, starts a new time using the break time
+    //
+    public void notifyUser() {
+
     }
 
     // Settings Fragment

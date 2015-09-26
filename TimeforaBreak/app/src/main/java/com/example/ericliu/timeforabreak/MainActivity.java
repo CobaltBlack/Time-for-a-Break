@@ -6,15 +6,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -22,21 +19,30 @@ public class MainActivity extends Activity {
     TextView hours_text;
     TextView minutes_text;
     TextView seconds_text;
-    Boolean isWorking;
+    //Boolean isWorking;
 
-    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-    //String workInterval = sharedPref.getString(, "");
+    private int workInterval;
+    private int breakInterval;
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Sets the default values for the application on initial running of the app
         PreferenceManager.setDefaultValues(this, R.xml.pref_general, false);
 
+        //gets the default intervals from the settings
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String workString = sharedPref.getString("work_interval", "30");
+        String breakString = sharedPref.getString("break_interval", "5");
+
+        workInterval = Integer.parseInt(workString) * 60000;
+        breakInterval = Integer.parseInt(breakString) * 60000;
+
         hours_text = (TextView)findViewById(R.id.hours_text);
         minutes_text = (TextView)findViewById(R.id.minutes_text);
         seconds_text = (TextView)findViewById(R.id.seconds_text);
+
+
     }
 
     @Override
@@ -74,7 +80,7 @@ public class MainActivity extends Activity {
     }
 
     public void startTimer(View view) {
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(workInterval, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 //mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);

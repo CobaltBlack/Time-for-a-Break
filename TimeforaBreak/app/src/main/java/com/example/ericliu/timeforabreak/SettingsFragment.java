@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by Josh on 9/26/2015.
+ * Contains any settings fragments and tools for user preferences
  */
 // Settings Fragment
 public class SettingsFragment extends PreferenceFragment {

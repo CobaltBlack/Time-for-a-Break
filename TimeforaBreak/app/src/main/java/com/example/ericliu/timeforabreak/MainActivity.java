@@ -24,6 +24,9 @@ public class MainActivity extends Activity {
     TextView seconds_text;
     Boolean isWorking;
 
+    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+    //String workInterval = sharedPref.getString(, "");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,20 +126,5 @@ public class MainActivity extends Activity {
 
     }
 
-    // Settings Fragment
-    public static class SettingsFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.pref_general);
-        }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = super.onCreateView(inflater, container, savedInstanceState);
-            view.setBackgroundColor(getResources().getColor(android.R.color.white));
-
-            return view; }
-    }
 }

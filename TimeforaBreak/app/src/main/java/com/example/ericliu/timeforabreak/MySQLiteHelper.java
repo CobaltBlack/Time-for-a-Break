@@ -54,8 +54,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT, description TEXT, image_path TEXT )";
 
-        // create stretchs table
+        // create stretches table
         db.execSQL(CREATE_STRETCH_TABLE);
+        //Insert a value to the table
+        ContentValues values = new ContentValues();
+        values.put(KEY_NAME, "test");
+        values.put(KEY_DESCRIPTION, "description");
+        values.put(KEY_IMAGE_PATH, "image");
+        db.insert("stretch", null, values);
     }
 
     @Override
@@ -67,6 +73,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         this.onCreate(db);
     }
 
+    private void populateDatabase() {
+        Stretch stretch = new Stretch(1, "test", "description", "path");
+        addStretch(stretch);
+    }
+
     //---------------------------------------------------------------------
 
     /**
@@ -74,11 +85,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
      */
 
     public void addStretch(Stretch stretch){
-        //for logging
-        Log.d("addStretch", stretch.toString());
-
         // 1. get reference to writable DB
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
 
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
@@ -98,7 +106,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     public Stretch getstretch(int id){
 
         // 1. get reference to readable DB
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
 
         // 2. build query
         Cursor cursor =
@@ -125,6 +133,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         Log.d("getstretch("+id+")", stretch.toString());
 
         // 5. return stretch
+        cursor.close();
         return stretch;
     }
 

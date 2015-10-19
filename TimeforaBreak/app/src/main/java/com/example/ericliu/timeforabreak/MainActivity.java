@@ -9,8 +9,6 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,6 +21,8 @@ public class MainActivity extends Activity {
 
     private int workInterval;
     private int breakInterval;
+
+    private MySQLiteHelper db;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         minutes_text = (TextView)findViewById(R.id.minutes_text);
         seconds_text = (TextView)findViewById(R.id.seconds_text);
 
-
+        db = new MySQLiteHelper(this);
     }
 
     @Override
@@ -132,5 +132,8 @@ public class MainActivity extends Activity {
 
     }
 
+    public void testDatabase(View view) {
+        db.getstretch(1);
+    }
 
 }

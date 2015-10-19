@@ -38,11 +38,9 @@ public class MainActivity extends Activity {
         workInterval = Integer.parseInt(workString) * 60000;
         breakInterval = Integer.parseInt(breakString) * 60000;
 
-        hours_text = (TextView)findViewById(R.id.hours_text);
-        minutes_text = (TextView)findViewById(R.id.minutes_text);
-        seconds_text = (TextView)findViewById(R.id.seconds_text);
-
-
+        hours_text = (TextView) findViewById(R.id.hours_text);
+        minutes_text = (TextView) findViewById(R.id.minutes_text);
+        seconds_text = (TextView) findViewById(R.id.seconds_text);
     }
 
     @Override
@@ -61,7 +59,7 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if ( id == R.id.action_settings ) {
+        if (id == R.id.action_settings) {
 //            getFragmentManager().beginTransaction()
 //                    .replace(android.R.id.content, new SettingsFragment())
 //                    .commit();
@@ -70,8 +68,7 @@ public class MainActivity extends Activity {
             transaction.replace(android.R.id.content, new SettingsFragment());
             transaction.addToBackStack(null);
             transaction.commit();
-        }
-        else if ( id == R.id.action_browse_stretches ) {
+        } else if (id == R.id.action_browse_stretches) {
             Intent intent = new Intent(this, BrowseStretchActivity.class);
             startActivity(intent);
         }
@@ -111,13 +108,13 @@ public class MainActivity extends Activity {
         String minutes_string = Integer.toString(minutes);
         String hours_string = Integer.toString(hours);
 
-        if(seconds_string.length() == 1) {
+        if (seconds_string.length() == 1) {
             seconds_string = "0" + seconds_string;
         }
-        if(minutes_string.length() == 1) {
+        if (minutes_string.length() == 1) {
             minutes_string = "0" + minutes_string;
         }
-        if(hours_string.length() == 1) {
+        if (hours_string.length() == 1) {
             hours_string = "0" + hours_string;
         }
 

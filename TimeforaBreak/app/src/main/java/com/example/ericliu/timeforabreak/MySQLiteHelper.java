@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Josh on 10/17/2015.
  * Database class for the program to gather stretch information from a SQLite DB
  */
-public class MySQLiteHelper extends SQLiteOpenHelper{
+public class MySQLiteHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
@@ -30,7 +30,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE_PATH = "image_path";
 
-    private static final String[] COLUMNS = {KEY_ID,KEY_NAME,KEY_DESCRIPTION,KEY_IMAGE_PATH};
+    private static final String[] COLUMNS = {KEY_ID, KEY_NAME, KEY_DESCRIPTION, KEY_IMAGE_PATH};
 
 
     public MySQLiteHelper(Context context) {
@@ -38,14 +38,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
     }
 
     /**
-     * @param db
-     *
-     * Creates the database for the app
-     * Includes on table with the following columns:
-     *      id [int]
-     *      name [text]
-     *      description (in the strings.xml) [text]
-     *      image_path [text]
+     * @param db Creates the database for the app
+     *           Includes on table with the following columns:
+     *           id [int]
+     *           name [text]
+     *           description (in the strings.xml) [text]
+     *           image_path [text]
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -73,7 +71,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
      * CRUD operations (create "add", read "get", update, delete) stretch + get all stretches + delete all stretches
      */
 
-    public void addStretch(Stretch stretch){
+    public void addStretch(Stretch stretch) {
         //for logging
         Log.d("addStretch", stretch.toString());
 
@@ -95,7 +93,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         db.close();
     }
 
-    public Stretch getstretch(int id){
+    public Stretch getstretch(int id) {
 
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
@@ -105,7 +103,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
                 db.query(TABLE_STRETCH, // a. table
                         COLUMNS, // b. column names
                         " id = ?", // c. selections
-                        new String[] { String.valueOf(id) }, // d. selections args
+                        new String[]{String.valueOf(id)}, // d. selections args
                         null, // e. group by
                         null, // f. having
                         null, // g. order by
@@ -122,7 +120,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         stretch.setDescription(cursor.getString(2));
         stretch.setImage_path(cursor.getString(3));
 
-        Log.d("getstretch("+id+")", stretch.toString());
+        Log.d("getstretch(" + id + ")", stretch.toString());
 
         // 5. return stretch
         return stretch;
@@ -174,8 +172,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper{
         // 3. updating row
         int i = db.update(TABLE_STRETCH, //table
                 values, // column/value
-                KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(stretch.getId()) }); //selection args
+                KEY_ID + " = ?", // selections
+                new String[]{String.valueOf(stretch.getId())}); //selection args
 
         // 4. close
         db.close();
